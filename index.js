@@ -24,7 +24,9 @@ bot.on("message", async (ctx) => {
         .join(" ");
       const response = await humanChatCall(rawRequest);
 
-      ctx.reply(response, { reply_to_message_id: ctx.message.message_id });
+      const replyTo = doesMessageHaveText ? ctx.message.message_id : undefined
+
+      ctx.reply(response, { reply_to_message_id: replyTo});
       ctx.deleteMessage(loadingMessage.message_id);
     }
   } catch (e) {
